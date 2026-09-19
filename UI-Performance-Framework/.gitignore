@@ -1,0 +1,5 @@
+reports/
+deps/
+target/
+.env
+__pycache__/

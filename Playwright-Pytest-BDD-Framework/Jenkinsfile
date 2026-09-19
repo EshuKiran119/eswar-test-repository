@@ -1,0 +1,14 @@
+pipeline {
+  agent any
+  options { timestamps() }
+  stages {
+    stage('API quality gate') {
+      steps {
+        sh 'python3 -m venv .venv'
+        sh '.venv/bin/pip install -r requirements.txt'
+        sh '.venv/bin/python -m pytest tests/api -q --junitxml=reports/junit.xml'
+      }
+    }
+  }
+  post { always { junit allowEmptyResults: false, testResults: 'reports/junit.xml' } }
+}

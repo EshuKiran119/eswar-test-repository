@@ -1,76 +1,45 @@
-# 🚀 Eswar's Automation Projects Repository
+# Eswar Sai Kiran Singamsetty
 
-Welcome to my **Automation Projects Repository**! This repository contains a collection of automation scripts and test frameworks that I have built for various domains, including API security, web automation, and telecom automation.
+**Senior QA Engineer | SDET | Automation & Quality Engineering**
 
-## 📂 Project Structure
+Senior QA Engineer at Experian, focused on Playwright/Python framework architecture, UI and API automation, performance engineering, CI/CD release validation and AWS observability. I apply specification-driven quality review and practical AI-assisted testing, including local LLM integration and n8n workflows.
 
-This repository consists of the following automation projects:
+[Public portfolio](https://eshukiran119.github.io/eswar-test-repository/) · [LinkedIn](https://www.linkedin.com/in/eswar-sai-kiran-singamsetty-429840198) · [Email](mailto:eshukiran57@gmail.com) · [Resume PDF](docs/assets/Eswar_Sai_Kiran_Singamsetty_ATS_Resume.pdf) · [Resume Word](docs/assets/Eswar_Sai_Kiran_Singamsetty_ATS_Resume.docx)
 
-1. **[API-Security-Tests](./API-Security-Tests)**  
-   - Automated security test cases for APIs using tools like Postman, Newman, or Python-based frameworks.
-   - Ensures API endpoints are protected against vulnerabilities.
-   - Uses authentication and authorization checks.
+## Framework showcase
 
-2. **[Playwright-Ecommerce-Tests](./Playwright-Ecommerce-Tests)**  
-   - End-to-end test automation for an eCommerce platform.
-   - Uses Playwright for UI testing across different browsers.
-   - Covers scenarios like user login, product search, cart management, and checkout.
+New personal reference implementations use a fictional store and synthetic data. They demonstrate framework structure and selected techniques; they are not copies of employer systems.
 
-3. **[Telecom-Automation](./Telecom-Automation)**  
-   - Automation scripts for telecom-related processes.
-   - Includes provisioning, SIM management, and network service validation.
-   - Uses Python and API testing frameworks for verification.
+| Framework | What to inspect |
+|---|---|
+| [Playwright + pytest-bdd](Playwright-Pytest-BDD-Framework/) | UI/API layers, environments, BDD, cleanup, CI and local AI/workflow examples |
+| [Backend performance](Backend-Performance-Framework/) | k6/JMeter suites, correlation, assertions, workload profiles and result gates |
+| [UI performance](UI-Performance-Framework/) | JMeter/Selenium/Groovy, browser ownership, explicit waits and journey measurement |
 
-## 🛠 Technologies Used
+[Execution evidence](SAMPLE_VERIFICATION.md) records what has actually been run. Browser and optional integration execution still need their declared dependencies.
 
-- **Programming Languages**: Python, JavaScript
-- **Testing Frameworks**: Playwright, Postman, Newman, PyTest
-- **CI/CD**: GitHub Actions
-- **Version Control**: Git, GitHub
-- **Other Tools**: REST API, MongoDB, MySQL
+## Public code samples
 
-## 🔥 Getting Started
+These personal examples illustrate selected techniques. They are not the employer-owned automation frameworks described in my professional experience.
 
-To set up and run any project:
+| Project | Code currently present | Technologies |
+|---|---|---|
+| [Playwright login automation](Playwright-Ecommerce-Tests/) | Parameterized SauceDemo login test, Chromium fixture and Allure configuration | Python, Playwright, pytest |
+| [API/security starters](API-Security-Tests/) | Karate user-list scenario and a Python ZAP integration helper | Karate, REST, Python, OWASP ZAP |
+| [Selenium/Robot login examples](Telecom-Automation/) | Selenium page object, unittest login example and Robot login scenario | Python, Selenium, Robot Framework |
 
-1. **Clone the Repository**  
-   ```
-   git clone https://github.com/EshuKiran119/eswar-test-repository.git
-   ```
-2. **Navigate to the Project Folder**  
-   ```
-   cd <Project-Name>
-   ```
-3. **Install Dependencies**  
-   - For Python projects:
-     ```
-     pip install -r requirements.txt
-     ```
-   - For Playwright projects:
-     ```
-     npm install
-     npx playwright install
-     ```
-4. **Run Test Cases**  
-   - Python API tests:
-     ```
-     pytest test_suite.py
-     ```
-   - Playwright tests:
-     ```
-     npx playwright test
-     ```
+Each folder README documents its actual scope and remaining execution prerequisites. Existing project source files have been preserved.
 
-## 📌 Features
+## Engineering approach
 
-✅ Well-structured and modular test frameworks  
-✅ Supports API and UI automation  
-✅ Scalable and easy to extend  
-✅ Uses best practices for test automation  
+- Design maintainable framework layers and reusable BDD scenarios.
+- Review acceptance criteria, integration behavior, test data and negative scenarios before implementation.
+- Connect UI/API regression evidence with CI/CD quality gates and release validation.
+- Investigate failures using cloud logs, service evidence and test-data checks.
+- Apply AI-assisted test design and privacy-safe synthetic data with engineering review.
 
-## 📧 Contact
+## Portfolio and GitHub Pages
 
-If you have any questions, feel free to reach out!  
+Website source lives in `docs/`. GitHub Pages is configured through `.github/workflows/deploy-portfolio-pages.yml`, which validates the site and publishes only that directory. Changes pushed to `main` under `docs/` redeploy the portfolio.
 
-🔗 **GitHub Profile**: [EshuKiran119](https://github.com/EshuKiran119)  
-📧 **Email**: _eshukiran57@gmail.com_  
+See [editing and maintenance guide](MAINTAINING_PORTFOLIO.md) and [deployment notes](docs/README_DEPLOY.md). Existing project source has been preserved. All new frameworks are personal demonstrations using fictional data.

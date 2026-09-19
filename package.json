@@ -1,0 +1,1 @@
+{"name":"eswar-qa-portfolio","version":"1.0.0","private":true,"description":"Static QA engineering portfolio; no production dependencies","scripts":{"dev":"node preview-server.mjs","check":"python3 scripts/validate_portfolio.py"}}

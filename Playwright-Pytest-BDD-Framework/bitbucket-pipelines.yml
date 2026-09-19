@@ -1,0 +1,10 @@
+image: python:3.11-slim
+pipelines:
+  default:
+    - step:
+        name: Synthetic API regression gate
+        script:
+          - pip install -r requirements.txt
+          - python -m pytest tests/api -q --junitxml=reports/junit.xml
+        artifacts:
+          - reports/**

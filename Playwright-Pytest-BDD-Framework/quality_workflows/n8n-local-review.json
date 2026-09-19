@@ -1,0 +1,53 @@
+{
+  "name": "Synthetic QA review with local LLM",
+  "active": false,
+  "nodes": [
+    {
+      "id": "manual",
+      "name": "Manual review",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "review",
+      "name": "Local synthetic review",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:11434/api/generate",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"model\": \"qwen2.5:3b\", \"stream\": false, \"format\": \"json\", \"prompt\": \"Suggest negative scenarios for a fictional store: authenticated users can order 1-10 units and can only read their own orders. Return a JSON object. Human review is required.\"}",
+        "options": {
+          "timeout": 90000
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Manual review": {
+      "main": [
+        [
+          {
+            "node": "Local synthetic review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
