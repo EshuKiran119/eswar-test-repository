@@ -1,0 +1,74 @@
+name: Import verified portfolio source
+on:
+  workflow_dispatch:
+    inputs:
+      sha256:
+        description: SHA256 of the owner-uploaded portfolio-source.zip
+        required: true
+        type: string
+permissions:
+  contents: write
+concurrency:
+  group: source-import
+  cancel-in-progress: false
+jobs:
+  import:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify and unpack approved source
+        env:
+          BUNDLE_SHA256: ${{ inputs.sha256 }}
+        run: |
+          python3 - <<'PY'
+          import hashlib, os, re, stat, subprocess, zipfile
+          from pathlib import Path
+          archive = Path('portfolio-source.zip')
+          expected = os.environ['BUNDLE_SHA256']
+          assert re.fullmatch(r'[0-9a-f]{64}', expected), 'Invalid SHA256'
+          assert hashlib.sha256(archive.read_bytes()).hexdigest() == expected, 'Bundle changed'
+          baseline = '82c5e6f1f1641626a9297090107473e37ae85644'
+          original = subprocess.check_output(['git','ls-tree','-r','--name-only',baseline], text=True).splitlines()
+          preserved = {f: subprocess.check_output(['git','show',baseline+':'+f]) for f in original if not f.endswith('README.md')}
+          for name, content in preserved.items():
+              assert Path(name).read_bytes() == content, 'Existing project changed: '+name
+          folders = {'docs','scripts','Playwright-Pytest-BDD-Framework','Backend-Performance-Framework','UI-Performance-Framework','API-Security-Tests','Playwright-Ecommerce-Tests','Telecom-Automation'}
+          roots = {'.gitignore','README.md','MAINTAINING_PORTFOLIO.md','SAMPLE_VERIFICATION.md','package.json','preview-server.mjs'}
+          with zipfile.ZipFile(archive) as bundle:
+              assert len(bundle.infolist()) <= 200
+              assert sum(i.file_size for i in bundle.infolist()) < 10_000_000
+              for item in bundle.infolist():
+                  path = Path(item.filename)
+                  assert not path.is_absolute() and '..' not in path.parts
+                  assert path.parts[0] in folders or str(path) in roots, 'Unexpected path: '+str(path)
+                  assert not stat.S_ISLNK(item.external_attr >> 16)
+                  if item.is_dir():
+                      continue
+                  path.parent.mkdir(parents=True, exist_ok=True)
+                  path.write_bytes(bundle.read(item))
+          for name, content in preserved.items():
+              assert Path(name).read_bytes() == content, 'Original source would be modified: '+name
+          archive.unlink()
+          print('Imported approved files and preserved', len(preserved), 'original source files.')
+          PY
+      - name: Validate portfolio
+        run: |
+          python3 scripts/validate_portfolio.py
+          node --check docs/app.js
+      - name: Commit source to main
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          if git diff --cached --name-only | grep -q '^.github/'; then
+            echo 'Workflow changes must be committed by the repository owner.'
+            exit 1
+          fi
+          git commit -m 'Publish portfolio and QA framework showcase'
+          git push origin HEAD:main
