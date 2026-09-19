@@ -1,0 +1,34 @@
+name: Synthetic backend performance smoke
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned engines
+        run: |
+          curl --fail --location --silent --show-error https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.tgz -o /tmp/jmeter.tgz
+          tar -xzf /tmp/jmeter.tgz -C /tmp
+          curl --fail --location --silent --show-error https://github.com/grafana/k6/releases/download/v0.57.0/k6-v0.57.0-linux-amd64.tar.gz -o /tmp/k6.tgz
+          tar -xzf /tmp/k6.tgz -C /tmp
+      - name: JMeter gate
+        run: python scripts/with_demo.py python Backend-Performance-Framework/scripts/run.py jmeter --binary /tmp/apache-jmeter-5.6.3/bin/jmeter --users 2 --iterations 2
+      - name: k6 gate
+        run: python scripts/with_demo.py python Backend-Performance-Framework/scripts/run.py k6 --binary /tmp/k6-v0.57.0-linux-amd64/k6 --users 2
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: backend-performance-evidence
+          path: Backend-Performance-Framework/reports/
+          retention-days: 7

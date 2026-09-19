@@ -1,0 +1,43 @@
+name: Validate and deploy QA portfolio
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'scripts/validate_portfolio.py'
+      - '.github/workflows/deploy-portfolio-pages.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Validate portfolio links and resume files
+        run: python3 scripts/validate_portfolio.py
+      - name: Check JavaScript syntax
+        run: node --check docs/app.js
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload portfolio only
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
