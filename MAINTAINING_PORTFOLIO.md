@@ -10,7 +10,7 @@ All portfolio source is ordinary HTML, CSS and JavaScript. There is no proprieta
 | Layout, colors, spacing and responsive behavior | `docs/styles.css` |
 | Mobile menu and navigation behavior | `docs/app.js` |
 | Resume content and DOCX formatting | `scripts/build_resume.py` |
-| Recruiter downloads | `docs/assets/Eswar_Sai_Kiran_Singamsetty_ATS_Resume.pdf` and `.docx` |
+| Recruiter downloads | `docs/assets/Eswar_Sai_Kiran_Singamsetty_ATS_Resume_Updated.pdf` and `docs/assets/Eswar_Sai_Kiran_Singamsetty_ATS_Resume.docx` |
 | Search metadata and site address | `docs/index.html`, `docs/sitemap.xml`, `docs/robots.txt` |
 | Source showcase download | `docs/assets/Eswar_QA_Framework_Showcase.zip` |
 | GitHub Pages deployment | `.github/workflows/deploy-portfolio-pages.yml` |
