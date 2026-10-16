@@ -11,6 +11,28 @@
   let digits = '';
   let noCount = 0;
   let yesCount = 0;
+  const burstColors = ['#e46a83', '#e5b85e', '#7bb6ae', '#aa87ba', '#f3a8bd', '#fff0bd'];
+
+  function partyBurst() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const burst = document.createElement('div');
+    burst.className = 'party-burst';
+    burst.setAttribute('aria-hidden', 'true');
+    for (let index = 0; index < 46; index += 1) {
+      const angle = (Math.PI * 2 * index) / 46 + (Math.random() - .5) * .18;
+      const distance = 90 + Math.random() * 170;
+      const piece = document.createElement('span');
+      piece.className = 'party-burst__piece';
+      piece.style.setProperty('--burst-x', `${Math.cos(angle) * distance}px`);
+      piece.style.setProperty('--burst-y', `${Math.sin(angle) * distance}px`);
+      piece.style.setProperty('--burst-rotation', `${Math.round(Math.random() * 540 - 270)}deg`);
+      piece.style.setProperty('--burst-color', burstColors[index % burstColors.length]);
+      piece.style.setProperty('--burst-delay', `${Math.random() * .12}s`);
+      burst.appendChild(piece);
+    }
+    document.body.appendChild(burst);
+    window.setTimeout(() => burst.remove(), 1600);
+  }
 
   const showScreen = (id) => {
     screens.forEach((screen) => {
@@ -49,9 +71,12 @@
   function submitPasscode() {
     if (digits.length !== 4) return;
     if (digits === code) {
-      passcodeMessage.textContent = 'Correct. You are officially birthday-authorized.';
+      passcodeMessage.textContent = 'Correct. Nana is officially birthday-authorized.';
       passcodeMessage.classList.remove('is-error');
-      window.setTimeout(() => showScreen('promptScreen'), 500);
+      window.setTimeout(() => {
+        showScreen('promptScreen');
+        partyBurst();
+      }, 500);
       return;
     }
     passcodeMessage.textContent = 'Oops! Wrong passcode. Try again, birthday genius.';
@@ -110,6 +135,7 @@
   noButton.addEventListener('click', () => {
     if (yesCount > 0) {
       showScreen('giftsScreen');
+      partyBurst();
       return;
     }
     noCount += 1;
@@ -126,6 +152,7 @@
       noButton.classList.add('button--coral');
     } else {
       showScreen('giftsScreen');
+      partyBurst();
     }
   });
   yesButton.addEventListener('click', () => {
@@ -138,7 +165,10 @@
       noButton.textContent = 'YES, obviously';
       noButton.classList.remove('button--outline');
       noButton.classList.add('button--coral');
-    } else showScreen('giftsScreen');
+    } else {
+      showScreen('giftsScreen');
+      partyBurst();
+    }
   });
   const giftDialog = document.getElementById('giftDialog');
   const giftViews = [...document.querySelectorAll('.gift-view')];
@@ -203,11 +233,13 @@
   });
   function checkCandles() {
     if (!candles.every((candle) => candle.classList.contains('is-out'))) return;
-    cakeTitle.textContent = 'HAPPY BIRTHDAY!';
-    cakeInstruction.textContent = 'Wish made. The universe has received your very specific cake-based request.';
+    if (!wishMessage.hidden) return;
+    cakeTitle.textContent = 'HAPPY BIRTHDAY, NANA!';
+    cakeInstruction.textContent = 'Wish made, Your Honor. The universe has received your cake-based request.';
     wishMessage.hidden = false;
     magicWand.hidden = true;
     relightCake.hidden = false;
+    partyBurst();
   }
   function resetCake() {
     candles.forEach((candle) => {
@@ -215,7 +247,7 @@
       candle.setAttribute('aria-pressed', 'false');
     });
     cakeTitle.textContent = 'MAKE A WISH';
-    cakeInstruction.textContent = 'Tap every candle to blow it out — or use the magic wand for the lazy option.';
+    cakeInstruction.textContent = 'Tap every candle to blow it out — or let the magic wand do the work, Judge Nana.';
     wishMessage.hidden = true;
     magicWand.hidden = false;
     relightCake.hidden = true;

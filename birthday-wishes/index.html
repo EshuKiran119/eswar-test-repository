@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7e7f2">
-  <meta name="description" content="A tiny birthday surprise filled with jokes, memories, and cake.">
-  <title>A birthday surprise for you</title>
+  <meta name="description" content="A birthday surprise for Nana, born on December 24—complete with jokes, memories, and cake.">
+  <title>Happy birthday, Nana! — The Birthday Vault</title>
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
 </head>
@@ -23,7 +23,7 @@
       <div class="curtain curtain--left" aria-hidden="true"></div>
       <div class="curtain curtain--right" aria-hidden="true"></div>
       <div class="countdown-card">
-        <p class="eyebrow eyebrow--gold">A VERY IMPORTANT ANNOUNCEMENT</p>
+        <p class="eyebrow eyebrow--gold">DECEMBER 24 • NANA'S DAY</p>
         <div class="clock" aria-hidden="true">
           <span class="clock__roman clock__roman--12">XII</span>
           <span class="clock__roman clock__roman--3">III</span>
@@ -34,7 +34,7 @@
           <i class="clock__pin"></i>
         </div>
         <h1 id="countdownTitle" class="countdown-title">MIDNIGHT<br><span>COUNTDOWN</span></h1>
-        <p class="countdown-note">One birthday. Three gifts. Zero chance of acting your age.</p>
+        <p class="countdown-note">One future judge. Three gifts. Zero chance of acting your age.</p>
         <div class="digital-time" aria-label="12 hours, 24 minutes, 0 seconds">
           <span>12</span><i>:</i><span>24</span><i>:</i><span>00</span>
         </div>
@@ -48,14 +48,14 @@
       <div class="passcode-layout">
         <div class="portrait-frame portrait-frame--gate">
           <div class="portrait-frame__tape" aria-hidden="true"></div>
-          <img src="assets/birthday-character.webp" alt="A cheerful birthday friend holding a tiny cake">
-          <span class="photo-caption">official birthday VIP</span>
+          <img src="assets/birthday-character.webp" alt="A cheerful birthday friend holding a tiny cake for Nana">
+          <span class="photo-caption">Nana: official birthday VIP</span>
           <span class="wrong-mark" id="wrongMark" aria-hidden="true">×</span>
         </div>
         <div class="passcode-panel">
-          <p class="eyebrow">THE SECRET BIRTHDAY VAULT</p>
+          <p class="eyebrow">THE SECRET BIRTHDAY VAULT, YOUR HONOR</p>
           <h1 id="passcodeTitle">Password, please</h1>
-          <p class="panel-copy">Enter the 4-digit secret passcode.<br><span>Hint: it’s a very important date.</span></p>
+          <p class="panel-copy">Enter the 4-digit secret passcode.<br><span>Hint: Nana's birthday is December 24.</span></p>
           <div class="digit-row" id="digitRow" aria-label="Passcode entry">
             <span class="digit-cell" data-digit="0"></span>
             <span class="digit-cell" data-digit="1"></span>
@@ -77,13 +77,13 @@
 
     <section class="screen screen--prompt" id="promptScreen" aria-labelledby="promptTitle" hidden>
       <div class="prompt-confetti" aria-hidden="true"></div>
-      <p class="eyebrow">A QUICK QUESTION</p>
-      <h1 class="handwritten" id="promptTitle">I made something<br>ridiculously special for you…</h1>
+      <p class="eyebrow">A QUICK QUESTION FOR NANA</p>
+      <h1 class="handwritten" id="promptTitle">Nana, I made something<br>ridiculously special for you…</h1>
       <div class="prompt-portrait portrait-frame">
         <img src="assets/birthday-character.webp" alt="Your birthday friend is holding a cake and waiting excitedly">
         <span class="prompt-sticker" aria-hidden="true">psst!</span>
       </div>
-      <p class="prompt-question" id="promptQuestion">Do you wanna see it?</p>
+      <p class="prompt-question" id="promptQuestion">Ready for your December 24 surprise?</p>
       <div class="prompt-actions">
         <button type="button" class="button button--coral" id="yesButton">YES, obviously</button>
         <button type="button" class="button button--outline" id="noButton">Nope</button>
@@ -92,9 +92,9 @@
     </section>
 
     <section class="screen screen--gifts" id="giftsScreen" aria-labelledby="giftsTitle" hidden>
-      <p class="eyebrow">YOUR BIRTHDAY SPOILS</p>
-      <h1 class="gift-heading" id="giftsTitle">Pick a present.<br><span>Any present.</span></h1>
-      <p class="gift-intro">Tap a heart to unlock your highly exclusive, questionably valuable gifts.</p>
+      <p class="eyebrow">NANA'S BIRTHDAY SPOILS</p>
+      <h1 class="gift-heading" id="giftsTitle">The birthday case<br><span>is now in session.</span></h1>
+      <p class="gift-intro">Select a gift, Your Honor. The court has made its ruling.</p>
       <div class="gift-grid">
         <button class="gift-choice" type="button" data-gift="memories" aria-label="Open the memories gift">
           <span class="gift-heart" aria-hidden="true"><i></i><b></b></span>
@@ -120,7 +120,7 @@
 
     <footer class="site-footer" id="siteFooter" hidden>
       <button type="button" class="text-button" id="backToGifts">← Back to the gifts</button>
-      <span class="footer-note">made with a suspicious amount of love</span>
+      <span class="footer-note">made with a suspicious amount of love for Nana</span>
     </footer>
   </main>
 
@@ -146,23 +146,23 @@
       </section>
 
       <section class="gift-view gift-view--letter" id="letterView" hidden>
-        <div class="letter-art portrait-frame"><img src="assets/birthday-character.webp" alt="Your birthday friend with a tiny strawberry cake"><span class="photo-caption">your favorite human (probably)</span></div>
+        <div class="letter-art portrait-frame"><img src="assets/birthday-character.webp" alt="Nana's birthday friend with a tiny strawberry cake"><span class="photo-caption">official court sketch</span></div>
         <div class="letter-content">
-          <p class="eyebrow eyebrow--light">FROM YOUR VERY OFFICIAL FAN CLUB</p>
-          <h2 class="dialog-title" id="letterTitle">Happy birthday, superstar.</h2>
+          <p class="eyebrow eyebrow--light">A NOTE FOR NANA, FROM YOUR FOREVER FAN CLUB</p>
+          <h2 class="dialog-title" id="letterTitle">Happy birthday, Nana.</h2>
           <div class="letter-paper">
-            <p>Congratulations! You've completed another year of being <em>this</em> fabulous, despite the strong competition from houseplants and dogs in tiny sweaters.</p>
-            <p>I hope your day is full of good people, excellent snacks, and absolutely no one asking, “So, what are your plans for the next five years?”</p>
-            <p>Thanks for being the person who makes ordinary days funnier, kinder, and much more likely to involve a snack run. You deserve the whole cake — not the tiny “we're being sensible” slice.</p>
-            <p class="letter-signoff">Big birthday love,<br><span>your mildly embarrassing fan club</span></p>
+            <p>On December 24, the world got its favorite future judge. Your Honor, today's birthday court is now in session—and Nana is very much the guest of honor.</p>
+            <p>Today's rulings are final: snacks are mandatory, laughter is admissible, and nobody may ask about five-year plans before cake.</p>
+            <p>I hope your day is packed with people who adore you, your favorite treats, and every little step toward the courtroom you dream of. You deserve the whole cake; no appeals.</p>
+            <p class="letter-signoff">All my love,<br><span>I love you always and forever ♾️</span></p>
           </div>
         </div>
       </section>
 
       <section class="gift-view gift-view--cake" id="cakeView" hidden>
-        <p class="eyebrow">ONE WISH. NO REFUNDS.</p>
+        <p class="eyebrow">ONE WISH. NO REFUNDS, YOUR HONOR.</p>
         <h2 class="cake-title" id="cakeTitle">MAKE A WISH</h2>
-        <p class="cake-instruction" id="cakeInstruction">Tap every candle to blow it out — or use the magic wand for the lazy option.</p>
+        <p class="cake-instruction" id="cakeInstruction">Tap every candle to blow it out — or let the magic wand do the work, Judge Nana.</p>
         <div class="cake-stage">
           <div class="cake-sparkle cake-sparkle--one" aria-hidden="true">✦</div>
           <div class="cake-sparkle cake-sparkle--two" aria-hidden="true">✳</div>
@@ -175,7 +175,7 @@
           <div class="cake cake--bottom"><span class="cake-icing"></span><span class="cake-icing cake-icing--drip"></span></div>
           <div class="cake-plate"></div>
         </div>
-        <p class="wish-message" id="wishMessage" aria-live="polite" hidden>May your year be sweet, your group chat be funny, and your cake be completely unshared.</p>
+        <p class="wish-message" id="wishMessage" aria-live="polite" hidden>May your year be sweet, your rulings be fair, your group chat hilarious, and your cake completely unshared.</p>
         <div class="cake-actions">
           <button class="button button--coral" type="button" id="magicWand">Magic wand ✨</button>
           <button class="button button--cream" type="button" id="relightCake" hidden>One more wish</button>
