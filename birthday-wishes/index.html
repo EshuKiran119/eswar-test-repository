@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7e7f2">
+  <meta name="description" content="A tiny birthday surprise filled with jokes, memories, and cake.">
+  <title>A birthday surprise for you</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="paper-grain" aria-hidden="true"></div>
+  <div id="confetti" class="confetti" aria-hidden="true"></div>
+  <main class="experience" id="experience">
+    <header class="site-mark" aria-label="A birthday surprise">
+      <span class="site-mark__sparkle" aria-hidden="true">✳</span>
+      <span>the birthday <b>vault</b></span>
+      <span class="site-mark__sparkle" aria-hidden="true">✳</span>
+    </header>
+
+    <section class="screen screen--countdown is-active" id="countdownScreen" aria-labelledby="countdownTitle">
+      <div class="curtain curtain--left" aria-hidden="true"></div>
+      <div class="curtain curtain--right" aria-hidden="true"></div>
+      <div class="countdown-card">
+        <p class="eyebrow eyebrow--gold">A VERY IMPORTANT ANNOUNCEMENT</p>
+        <div class="clock" aria-hidden="true">
+          <span class="clock__roman clock__roman--12">XII</span>
+          <span class="clock__roman clock__roman--3">III</span>
+          <span class="clock__roman clock__roman--6">VI</span>
+          <span class="clock__roman clock__roman--9">IX</span>
+          <i class="clock__hand clock__hand--hour"></i>
+          <i class="clock__hand clock__hand--minute"></i>
+          <i class="clock__pin"></i>
+        </div>
+        <h1 id="countdownTitle" class="countdown-title">MIDNIGHT<br><span>COUNTDOWN</span></h1>
+        <p class="countdown-note">One birthday. Three gifts. Zero chance of acting your age.</p>
+        <div class="digital-time" aria-label="12 hours, 24 minutes, 0 seconds">
+          <span>12</span><i>:</i><span>24</span><i>:</i><span>00</span>
+        </div>
+        <button class="button button--gold" id="beginButton" type="button">Open your surprise <span aria-hidden="true">↗</span></button>
+        <p class="micro-note">The clock is dramatic. You don't have to wait.</p>
+      </div>
+      <div class="curtain__fringe" aria-hidden="true"></div>
+    </section>
+
+    <section class="screen screen--passcode" id="passcodeScreen" aria-labelledby="passcodeTitle" hidden>
+      <div class="passcode-layout">
+        <div class="portrait-frame portrait-frame--gate">
+          <div class="portrait-frame__tape" aria-hidden="true"></div>
+          <img src="assets/birthday-character.webp" alt="A cheerful birthday friend holding a tiny cake">
+          <span class="photo-caption">official birthday VIP</span>
+          <span class="wrong-mark" id="wrongMark" aria-hidden="true">×</span>
+        </div>
+        <div class="passcode-panel">
+          <p class="eyebrow">THE SECRET BIRTHDAY VAULT</p>
+          <h1 id="passcodeTitle">Password, please</h1>
+          <p class="panel-copy">Enter the 4-digit secret passcode.<br><span>Hint: it’s a very important date.</span></p>
+          <div class="digit-row" id="digitRow" aria-label="Passcode entry">
+            <span class="digit-cell" data-digit="0"></span>
+            <span class="digit-cell" data-digit="1"></span>
+            <span class="digit-cell" data-digit="2"></span>
+            <span class="digit-cell" data-digit="3"></span>
+          </div>
+          <input class="visually-hidden" id="passcodeInput" type="password" inputmode="numeric" autocomplete="one-time-code" maxlength="4" aria-label="Four digit passcode">
+          <div class="keypad" aria-label="Numeric keypad">
+            <button type="button" data-key="1" aria-label="1">1</button><button type="button" data-key="2" aria-label="2">2</button><button type="button" data-key="3" aria-label="3">3</button>
+            <button type="button" data-key="4" aria-label="4">4</button><button type="button" data-key="5" aria-label="5">5</button><button type="button" data-key="6" aria-label="6">6</button>
+            <button type="button" data-key="7" aria-label="7">7</button><button type="button" data-key="8" aria-label="8">8</button><button type="button" data-key="9" aria-label="9">9</button>
+            <span class="keypad__spacer" aria-hidden="true"></span><button type="button" data-key="0" aria-label="0">0</button><button type="button" class="keypad__utility" data-key="backspace" aria-label="Delete last digit">⌫</button>
+          </div>
+          <p class="passcode-message" id="passcodeMessage" aria-live="polite">Tap the buttons or use your keyboard.</p>
+          <button type="button" class="button button--coral try-again" id="tryAgainButton" hidden>Try again, birthday legend</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen screen--prompt" id="promptScreen" aria-labelledby="promptTitle" hidden>
+      <div class="prompt-confetti" aria-hidden="true"></div>
+      <p class="eyebrow">A QUICK QUESTION</p>
+      <h1 class="handwritten" id="promptTitle">I made something<br>ridiculously special for you…</h1>
+      <div class="prompt-portrait portrait-frame">
+        <img src="assets/birthday-character.webp" alt="Your birthday friend is holding a cake and waiting excitedly">
+        <span class="prompt-sticker" aria-hidden="true">psst!</span>
+      </div>
+      <p class="prompt-question" id="promptQuestion">Do you wanna see it?</p>
+      <div class="prompt-actions">
+        <button type="button" class="button button--coral" id="yesButton">YES, obviously</button>
+        <button type="button" class="button button--outline" id="noButton">Nope</button>
+      </div>
+      <p class="micro-note" id="promptAside">No pressure. (There is a little pressure.)</p>
+    </section>
+
+    <section class="screen screen--gifts" id="giftsScreen" aria-labelledby="giftsTitle" hidden>
+      <p class="eyebrow">YOUR BIRTHDAY SPOILS</p>
+      <h1 class="gift-heading" id="giftsTitle">Pick a present.<br><span>Any present.</span></h1>
+      <p class="gift-intro">Tap a heart to unlock your highly exclusive, questionably valuable gifts.</p>
+      <div class="gift-grid">
+        <button class="gift-choice" type="button" data-gift="memories" aria-label="Open the memories gift">
+          <span class="gift-heart" aria-hidden="true"><i></i><b></b></span>
+          <span class="gift-choice__number">01</span>
+          <span class="gift-choice__title">The good old days</span>
+          <span class="gift-choice__hint">A tiny memory lane</span>
+        </button>
+        <button class="gift-choice" type="button" data-gift="letter" aria-label="Open your birthday letter">
+          <span class="gift-heart gift-heart--rose" aria-hidden="true"><i></i><b></b></span>
+          <span class="gift-choice__number">02</span>
+          <span class="gift-choice__title">A suspiciously nice letter</span>
+          <span class="gift-choice__hint">Compliments are inside</span>
+        </button>
+        <button class="gift-choice" type="button" data-gift="cake" aria-label="Open the birthday cake">
+          <span class="gift-heart gift-heart--plum" aria-hidden="true"><i></i><b></b></span>
+          <span class="gift-choice__number">03</span>
+          <span class="gift-choice__title">The cake situation</span>
+          <span class="gift-choice__hint">Make a wish (and behave)</span>
+        </button>
+      </div>
+      <div class="gifts-footer"><span aria-hidden="true">✳</span> Calories in these gifts: zero. <span aria-hidden="true">✳</span></div>
+    </section>
+
+    <footer class="site-footer" id="siteFooter" hidden>
+      <button type="button" class="text-button" id="backToGifts">← Back to the gifts</button>
+      <span class="footer-note">made with a suspicious amount of love</span>
+    </footer>
+  </main>
+
+  <dialog class="gift-dialog" id="giftDialog" aria-labelledby="dialogTitle">
+    <div class="dialog-card">
+      <button class="dialog-close" type="button" data-close-dialog aria-label="Close gift">×</button>
+      <section class="gift-view gift-view--memories" id="memoriesView" hidden>
+        <p class="eyebrow eyebrow--light">A FEW VERY IMPORTANT RECEIPTS</p>
+        <h2 class="dialog-title" id="dialogTitle">The memories department</h2>
+        <p class="dialog-copy">Exhibits A–D: proof that we're actually quite fun.</p>
+        <div class="gallery-controls">
+          <button class="round-control" type="button" data-gallery-step="-1" aria-label="Scroll photos left">←</button>
+          <span class="gallery-label">THE GOOD TIMES ARCHIVE</span>
+          <button class="round-control" type="button" data-gallery-step="1" aria-label="Scroll photos right">→</button>
+        </div>
+        <div class="memory-rail" id="memoryRail" tabindex="0" aria-label="Birthday memory snapshots">
+          <button class="memory-card" type="button" data-photo="0"><span class="memory-card__clip" aria-hidden="true"></span><img src="assets/memory-party.webp" alt="Silly party hat and balloon snapshot"><span class="memory-card__caption">main character energy</span></button>
+          <button class="memory-card" type="button" data-photo="1"><span class="memory-card__clip" aria-hidden="true"></span><img src="assets/memory-cozy.webp" alt="Cozy winter cocoa snapshot"><span class="memory-card__caption">professional cozy person</span></button>
+          <button class="memory-card" type="button" data-photo="2"><span class="memory-card__clip" aria-hidden="true"></span><img src="assets/memory-goofy.webp" alt="Goofy heart-sunglasses snapshot"><span class="memory-card__caption">fashion icon (allegedly)</span></button>
+          <button class="memory-card" type="button" data-photo="3"><span class="memory-card__clip" aria-hidden="true"></span><img src="assets/memory-sleepy.webp" alt="Sleepy late-night birthday snapshot"><span class="memory-card__caption">after one (1) activity</span></button>
+        </div>
+        <p class="dialog-footnote">Tap a photo to inspect the evidence. Use the arrows for more.</p>
+      </section>
+
+      <section class="gift-view gift-view--letter" id="letterView" hidden>
+        <div class="letter-art portrait-frame"><img src="assets/birthday-character.webp" alt="Your birthday friend with a tiny strawberry cake"><span class="photo-caption">your favorite human (probably)</span></div>
+        <div class="letter-content">
+          <p class="eyebrow eyebrow--light">FROM YOUR VERY OFFICIAL FAN CLUB</p>
+          <h2 class="dialog-title" id="letterTitle">Happy birthday, superstar.</h2>
+          <div class="letter-paper">
+            <p>Congratulations! You've completed another year of being <em>this</em> fabulous, despite the strong competition from houseplants and dogs in tiny sweaters.</p>
+            <p>I hope your day is full of good people, excellent snacks, and absolutely no one asking, “So, what are your plans for the next five years?”</p>
+            <p>Thanks for being the person who makes ordinary days funnier, kinder, and much more likely to involve a snack run. You deserve the whole cake — not the tiny “we're being sensible” slice.</p>
+            <p class="letter-signoff">Big birthday love,<br><span>your mildly embarrassing fan club</span></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="gift-view gift-view--cake" id="cakeView" hidden>
+        <p class="eyebrow">ONE WISH. NO REFUNDS.</p>
+        <h2 class="cake-title" id="cakeTitle">MAKE A WISH</h2>
+        <p class="cake-instruction" id="cakeInstruction">Tap every candle to blow it out — or use the magic wand for the lazy option.</p>
+        <div class="cake-stage">
+          <div class="cake-sparkle cake-sparkle--one" aria-hidden="true">✦</div>
+          <div class="cake-sparkle cake-sparkle--two" aria-hidden="true">✳</div>
+          <div class="candles" aria-label="Three birthday candles">
+            <button class="candle" type="button" aria-label="Blow out candle one"><i class="flame"></i><span></span></button>
+            <button class="candle" type="button" aria-label="Blow out candle two"><i class="flame"></i><span></span></button>
+            <button class="candle" type="button" aria-label="Blow out candle three"><i class="flame"></i><span></span></button>
+          </div>
+          <div class="cake cake--top"><span class="cake-icing"></span><span class="cake-cherry">♥</span></div>
+          <div class="cake cake--bottom"><span class="cake-icing"></span><span class="cake-icing cake-icing--drip"></span></div>
+          <div class="cake-plate"></div>
+        </div>
+        <p class="wish-message" id="wishMessage" aria-live="polite" hidden>May your year be sweet, your group chat be funny, and your cake be completely unshared.</p>
+        <div class="cake-actions">
+          <button class="button button--coral" type="button" id="magicWand">Magic wand ✨</button>
+          <button class="button button--cream" type="button" id="relightCake" hidden>One more wish</button>
+        </div>
+      </section>
+    </div>
+  </dialog>
+
+  <dialog class="photo-dialog" id="photoDialog" aria-label="Enlarged birthday memory">
+    <button class="dialog-close" type="button" data-close-photo aria-label="Close photo">×</button>
+    <img id="largePhoto" src="assets/memory-party.webp" alt="Enlarged birthday memory">
+    <p id="largePhotoCaption"></p>
+  </dialog>
+</body>
+</html>
